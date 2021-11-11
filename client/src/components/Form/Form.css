@@ -48,3 +48,7 @@
   font-size: 1rem;
   color: black;
 }
+
+.submit-button__icon {
+  font-size: 0.9rem;
+}

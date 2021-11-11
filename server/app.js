@@ -1,10 +1,12 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors());
 
 const ApiKey = '426827-suggesti-M6VY2QDY';
 
@@ -27,14 +29,20 @@ const getMusicSuggestions = async (req, res) => {
     }
     return band.Name;
   });
+  // const bandsMock = ['Band A', 'Band B', 'Band C', 'Band D', 'Band E', 'Band F'];
   res.type('application/json');
   return res.status(200).send(bands);
 };
 
 const getMusics = async (req, res) => {
-  const bandName = req.params.bandName.replace(' ', '-');
+  const whitePattern = /\s/g;
+  const pattern = /'/g;
+  const bandName = req.params.bandName.replace(whitePattern, '-').replace(pattern, '');
   const url = `https://api.deezer.com/artist/${bandName}`;
   const data = await fetcher(url);
+  if (data.error) {
+    return res.send('No results');
+  }
   const tracklistUrl = data.tracklist.slice(0, -1);
   const bandPictureUrl = data.picture;
   const { name } = data;
@@ -46,8 +54,13 @@ const getMusics = async (req, res) => {
     picture: bandPictureUrl,
     topTracks: tracks,
   };
+  // const mockArtistInfo = {
+  //   name: 'Temp',
+  //   picture: 'https://picsum.photos/200/300',
+  //   topTracks: ['1', '2', '3', '4', '5'],
+  // };
   res.type('application/json');
-  res.status(200).send(artistInfo);
+  return res.status(200).send(artistInfo);
 };
 
 // routes/middlewares

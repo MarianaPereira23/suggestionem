@@ -9,9 +9,9 @@ const Header = () => (
     </div>
     <nav className="page-header__navbar">
       <ul className="page-header__navbar-list">
-        <NavLink to="/" className="page-header__navbar-item" activeClassName="active">Home</NavLink>
-        <NavLink to="/search" className="page-header__navbar-item" activeClassName="active">Search</NavLink>
-        <NavLink to="/suggestions" className="page-header__navbar-item" activeClassName="active">Music</NavLink>
+        <NavLink to="/" className="page-header__navbar-item" activeclassname="active">Home</NavLink>
+        <NavLink to="/search" className="page-header__navbar-item" activeclassname="active">Search</NavLink>
+        <NavLink to="/suggestions" className="page-header__navbar-item" activeclassname="active">Music</NavLink>
       </ul>
     </nav>
   </header>
