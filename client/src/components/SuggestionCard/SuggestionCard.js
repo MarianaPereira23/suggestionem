@@ -6,6 +6,7 @@ import axios from 'axios';
 import './SuggestionCard.css';
 
 const SuggestionCard = ({ band }) => {
+  console.log('band', band);
   const [bandInfo, setBandInfo] = useState({ topTracks: [] });
 
   const fetcher = async input => {
@@ -18,6 +19,7 @@ const SuggestionCard = ({ band }) => {
   }, [band]);
 
   const displayTracks = bandInfo.topTracks.map((track, i) => (<li key={i}>{track}</li>));
+  console.log('info:', bandInfo);
 
   return (
     <article className="results-container__suggestion-card">

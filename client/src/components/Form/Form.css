@@ -1,5 +1,7 @@
 .form-container {
-  width: 100vw;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
   padding: 1rem 2rem;
   display: flex;
   flex-direction: column;
@@ -19,7 +21,7 @@
 }
 
 .search-form {
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +29,7 @@
 
 .search-form__submit-button {
   padding: 0.5rem;
-  border: 1px solid #BEA58B;
+  border: 2px solid #BEA58B;
   border-right: none;
   background-color: transparent;
 }
@@ -35,7 +37,7 @@
 .search-form__input-field {
   width: 75%;
   padding: 0.5rem;
-  border: 1px solid #BEA58B;
+  border: 2px solid #BEA58B;
   border-left: none;
   background-color: transparent;
 }

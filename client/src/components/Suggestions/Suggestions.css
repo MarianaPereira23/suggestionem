@@ -1,7 +1,11 @@
 .results-container {
-  margin: 1rem 0 2rem;
+  margin: 2rem 0 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+}
+
+.results-container__no-results {
+  text-align: center;
 }

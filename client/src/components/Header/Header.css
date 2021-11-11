@@ -16,6 +16,11 @@
   align-items: center;
 }
 
+.logo-link {
+  text-decoration: none;
+  color: black;
+}
+
 .logo-container__logo {
   margin-bottom: 0.2rem;
   font-family: 'Great Vibes', cursive;

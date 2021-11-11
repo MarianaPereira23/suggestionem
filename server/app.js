@@ -21,11 +21,11 @@ const getMusicSuggestions = async (req, res) => {
   const data = await fetcher(url);
   const musicSuggestions = data.Similar.Results;
   if (!musicSuggestions.length) {
-    return res.sendStatus(404);
+    return res.send('No results');
   }
   const bands = musicSuggestions.map(band => {
     if (band.Type !== 'music') {
-      return res.sendStatus(404);
+      return res.send('No results');
     }
     return band.Name;
   });
@@ -36,15 +36,21 @@ const getMusicSuggestions = async (req, res) => {
 
 const getMusics = async (req, res) => {
   const whitePattern = /\s/g;
-  const pattern = /'/g;
-  const bandName = req.params.bandName.replace(whitePattern, '-').replace(pattern, '');
+  const pattern = /(')/g;
+  let bandName = req.params.bandName.replace(whitePattern, '-').replace(pattern, '').toLowerCase();
+  if (bandName === '30-seconds-to-mars') {
+    bandName = 'thirty-seconds-to-mars';
+  }
+  if (bandName === 'o.a.r.') {
+    bandName = 'o-a-r';
+  }
   const url = `https://api.deezer.com/artist/${bandName}`;
   const data = await fetcher(url);
   if (data.error) {
     return res.send('No results');
   }
   const tracklistUrl = data.tracklist.slice(0, -1);
-  const bandPictureUrl = data.picture;
+  const bandPictureUrl = data.picture_medium;
   const { name } = data;
   const topTracksData = await fetcher(tracklistUrl);
   const tracksData = topTracksData.data;

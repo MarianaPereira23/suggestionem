@@ -6,3 +6,22 @@
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;;
 }
+
+.app-container {
+  background-color: #EAEAE9;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.start-searching {
+  font-size: 1.5rem;
+  margin-top: 20%;
+  text-align: center;
+}
+
+.search-first {
+  font-size: 1.5rem;
+  margin-top: 20%;
+  text-align: center;
+  padding: 0 1rem;
+}

@@ -14,8 +14,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomeImage />} />
-        <Route path="/search" element={<Form />} />
-        <Route path="/suggestions" element={<div>Empty Results Page</div>} />
+        <Route path="/search" element={<><Form /><h2 className="start-searching">Start Searching</h2></>} />
+        <Route path="/suggestions" element={<><Form /><h2 className="search-first">You must search to get results</h2></>} />
         <Route path="/suggestions/:searchTerm" element={<><Form /><Suggestions /></>} />
       </Routes>
     </div>

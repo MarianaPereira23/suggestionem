@@ -1,11 +1,11 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => (
   <header className="page-header">
     <div className="page-header__logo-container">
-      <h1 className="logo-container__logo">Suggestionem</h1>
+      <Link to="/" className="logo-link"><h1 className="logo-container__logo">Suggestionem</h1></Link>
     </div>
     <nav className="page-header__navbar">
       <ul className="page-header__navbar-list">
