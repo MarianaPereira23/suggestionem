@@ -1,0 +1,8 @@
+.homepage__background {
+  height: 85vh;
+  width: 100vw;
+  background-image: url('./Image/micro.jpeg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

@@ -1,3 +1,55 @@
-div {
-  color: yellow;
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+.page-header {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 15vh;
+}
+
+.page-header__logo-container {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-container__logo {
+  margin-bottom: 0.2rem;
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.5rem;
+}
+
+.page-header__navbar {
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #B4BEB9;
+}
+
+.page-header__navbar-list {
+  width: 100vw;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-header__navbar-item {
+  padding: 0 1rem;
+  text-decoration: none;
+  color: black;
+}
+
+.page-header__navbar-item:hover {
+  text-decoration: underline;
+}
+
+.active {
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  font-weight: bold;
 }

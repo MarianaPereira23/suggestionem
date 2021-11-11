@@ -1,3 +1,50 @@
-div {
-  color: green;
+.form-container {
+  width: 100vw;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container__section-title {
+  padding-bottom: 0.5rem;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+.form-container__section-description {
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.search-form {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-form__submit-button {
+  padding: 0.5rem;
+  border: 1px solid #BEA58B;
+  border-right: none;
+  background-color: transparent;
+}
+
+.search-form__input-field {
+  width: 75%;
+  padding: 0.5rem;
+  border: 1px solid #BEA58B;
+  border-left: none;
+  background-color: transparent;
+}
+
+.search-form__input-field:focus {
+  outline: none;
+}
+
+.search-form__input-field::placeholder {
+  font-size: 1rem;
+  color: black;
 }
