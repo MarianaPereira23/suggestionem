@@ -1,7 +1,5 @@
 /* eslint-disable consistent-return */
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable no-unused-vars */
-/* eslint-disable arrow-body-style */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './SuggestionCard.css';

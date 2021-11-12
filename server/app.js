@@ -15,13 +15,13 @@ const fetcher = async url => {
   return data.data;
 };
 
-const tasteDiveDataValidation = (bandData, res) => {
+const tasteDiveDataValidation = bandData => {
   if (!bandData.length) {
-    return res.send('No results');
+    return 'No results';
   }
   const bandsList = bandData.map(band => {
     if (band.Type !== 'music') {
-      return res.send('No results');
+      return 'No results';
     }
     return band.Name;
   });
