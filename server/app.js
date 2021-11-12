@@ -15,36 +15,50 @@ const fetcher = async url => {
   return data.data;
 };
 
-const getMusicSuggestions = async (req, res) => {
-  const bandName = req.url.replace('/', '');
-  const url = `https://tastedive.com/api/similar?q=${bandName}&k=${ApiKey}`;
-  const data = await fetcher(url);
-  const musicSuggestions = data.Similar.Results;
-  if (!musicSuggestions.length) {
+const tasteDiveDataValidation = (bandData, res) => {
+  if (!bandData.length) {
     return res.send('No results');
   }
-  const bands = musicSuggestions.map(band => {
+  const bandsList = bandData.map(band => {
     if (band.Type !== 'music') {
       return res.send('No results');
     }
     return band.Name;
   });
-  // const bandsMock = ['Band A', 'Band B', 'Band C', 'Band D', 'Band E', 'Band F'];
+  return bandsList;
+};
+
+const getMusicSuggestions = async (req, res) => {
+  const bandName = req.url.replace('/', '');
+  const url = `https://tastedive.com/api/similar?q=${bandName}&k=${ApiKey}`;
+  const data = await fetcher(url);
+  const musicSuggestions = data.Similar.Results;
+  const bands = tasteDiveDataValidation(musicSuggestions, res);
   res.type('application/json');
   return res.status(200).send(bands);
 };
 
-const getMusics = async (req, res) => {
-  const whitePattern = /\s/g;
-  const pattern = /(')/g;
-  let bandName = req.params.bandName.replace(whitePattern, '-').replace(pattern, '').toLowerCase();
+const bandValidation = band => {
+  const singleQuotePattern = /(')/g;
+  const whiteSpacePattern = /\s/g;
+  let bandName = band.replace('.', ' ')
+    .replace(singleQuotePattern, '')
+    .trim()
+    .replace(whiteSpacePattern, '-')
+    .toLowerCase();
   if (bandName === '30-seconds-to-mars') {
     bandName = 'thirty-seconds-to-mars';
   }
-  if (bandName === 'o.a.r.') {
-    bandName = 'o-a-r';
+  if (bandName === 'motörhead') {
+    bandName = 'motorhead';
   }
-  const url = `https://api.deezer.com/artist/${bandName}`;
+  return bandName;
+};
+
+const getMusics = async (req, res) => {
+  const { bandName } = req.params;
+  const band = bandValidation(bandName);
+  const url = `https://api.deezer.com/artist/${band}`;
   const data = await fetcher(url);
   if (data.error) {
     return res.send('No results');
@@ -60,16 +74,9 @@ const getMusics = async (req, res) => {
     picture: bandPictureUrl,
     topTracks: tracks,
   };
-  // const mockArtistInfo = {
-  //   name: 'Temp',
-  //   picture: 'https://picsum.photos/200/300',
-  //   topTracks: ['1', '2', '3', '4', '5'],
-  // };
   res.type('application/json');
   return res.status(200).send(artistInfo);
 };
-
-// routes/middlewares
 
 app.get('/:bandName', getMusicSuggestions);
 app.get('/:bandName/musics', getMusics);

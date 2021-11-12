@@ -21,8 +21,6 @@ const Suggestions = () => {
 
   useEffect(() => fetcher(searchTerm), [searchTerm]);
 
-  console.log(suggestedBands);
-
   if (suggestedBands === 'No results') {
     suggestions = <p className="results-container__no-results">Sorry, we could not find results for the band you just searched.</p>;
   }

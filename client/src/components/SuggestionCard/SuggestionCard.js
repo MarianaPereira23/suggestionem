@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
 /* eslint-disable arrow-body-style */
@@ -6,7 +7,6 @@ import axios from 'axios';
 import './SuggestionCard.css';
 
 const SuggestionCard = ({ band }) => {
-  console.log('band', band);
   const [bandInfo, setBandInfo] = useState({ topTracks: [] });
 
   const fetcher = async input => {
@@ -18,21 +18,36 @@ const SuggestionCard = ({ band }) => {
     fetcher(band);
   }, [band]);
 
-  const displayTracks = bandInfo.topTracks.map((track, i) => (<li key={i}>{track}</li>));
-  console.log('info:', bandInfo);
+  const displayTracks = () => {
+    if (!bandInfo.topTracks.length) {
+      return <p>Sorry, the top tracks for this band are unknown</p>;
+    }
+    return bandInfo.topTracks.map((track, i) => (<li key={i}>{track}</li>));
+  };
+
+  const displayResults = () => {
+    if (bandInfo === 'No results' || bandInfo === { topTracks: [] }) {
+      return;
+    }
+    return (
+      <>
+        <img className="suggestion-card__image" src={bandInfo.picture} alt={bandInfo.name} />
+        <div className="suggestion-card__info">
+          <h3 className="info__band-name">{bandInfo.name}</h3>
+          <div className="suggestion-card__details">
+            <p>Top 5 tracks:</p>
+            <ul className="info__top-tracks">
+              {displayTracks()}
+            </ul>
+          </div>
+        </div>
+      </>
+    );
+  };
 
   return (
-    <article className="results-container__suggestion-card">
-      <img className="suggestion-card__image" src={bandInfo.picture} alt={bandInfo.name} />
-      <div className="suggestion-card__info">
-        <h3 className="info__band-name">{bandInfo.name}</h3>
-        <div className="suggestion-card__details">
-          <p>Top 5 tracks:</p>
-          <ul className="info__top-tracks">
-            {displayTracks}
-          </ul>
-        </div>
-      </div>
+    <article className={`results-container__suggestion-card ${bandInfo === 'No results' ? 'hidden' : ''}`}>
+      {displayResults()}
     </article>
   );
 };
